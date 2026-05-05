@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Capuccino Café — Pemba</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap"
+    rel="stylesheet" />
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --cream: #faf6ef;
+      --warm-white: #f5f0e8;
+      --espresso: #2b1a0e;
+      --caramel: #b5703a;
+      --gold: #c9963f;
+      --muted: #8a7a6a;
+      --light-muted: #c4b8a8;
+      --border: #e0d5c5;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--cream);
+      color: var(--espresso);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.4rem 3rem;
+      background: rgba(250, 246, 239, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--espresso);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.25s;
+    }
+
+    .nav-links a:hover {
+      color: var(--caramel);
+    }
+
+    .nav-cta {
+      background: var(--espresso);
+      color: var(--cream) !important;
+      padding: 0.5rem 1.2rem;
+      border-radius: 2px;
+    }
+
+    .nav-cta:hover {
+      background: var(--caramel);
+      color: var(--cream) !important;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      padding: 8rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 50% 70%, rgba(181, 112, 58, 0.08) 0%, transparent 70%),
+        repeating-linear-gradient(135deg,
+          transparent,
+          transparent 40px,
+          rgba(181, 112, 58, 0.03) 40px,
+          rgba(181, 112, 58, 0.03) 41px);
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--caramel);
+      border: 1px solid var(--caramel);
+      padding: 0.35rem 1rem;
+      border-radius: 2px;
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.2s forwards;
+    }
+
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.5rem, 9vw, 7rem);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      color: var(--espresso);
+      opacity: 0;
+      animation: fadeUp 0.9s 0.35s forwards;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--caramel);
+    }
+
+    .hero-sub {
+      margin-top: 1.5rem;
+      font-size: 1rem;
+      color: var(--muted);
+      max-width: 420px;
+      line-height: 1.7;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.5s forwards;
+    }
+
+    .hero-actions {
+      margin-top: 2.8rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.65s forwards;
+    }
+
+    .btn-primary {
+      background: var(--espresso);
+      color: var(--cream);
+      padding: 0.85rem 2.2rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: background 0.25s, transform 0.2s;
+    }
+
+    .btn-primary:hover {
+      background: var(--caramel);
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      border: 1px solid var(--espresso);
+      color: var(--espresso);
+      padding: 0.85rem 2.2rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: all 0.25s;
+    }
+
+    .btn-outline:hover {
+      background: var(--espresso);
+      color: var(--cream);
+    }
+
+    .hero-scroll {
+      margin-top: 5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.85s forwards;
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 48px;
+      background: linear-gradient(to bottom, var(--caramel), transparent);
+      animation: pulse 2s infinite;
+    }
+
+    .scroll-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--light-muted);
+    }
+
+    /* INFO STRIP */
+    .info-strip {
+      background: var(--espresso);
+      color: var(--cream);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0;
+    }
+
+    .info-item {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      padding: 1.3rem 2.5rem;
+      border-right: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 0.82rem;
+      color: var(--light-muted);
+    }
+
+    .info-item:last-child {
+      border-right: none;
+    }
+
+    .info-icon {
+      font-size: 1rem;
+    }
+
+    .info-item strong {
+      color: var(--cream);
+      font-weight: 400;
+    }
+
+    /* SECTIONS COMMON */
+    section {
+      padding: 7rem 2rem;
+    }
+
+    .section-tag {
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--caramel);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 300;
+      line-height: 1.1;
+      color: var(--espresso);
+      margin-bottom: 1.5rem;
+    }
+
+    .section-title em {
+      font-style: italic;
+      color: var(--caramel);
+    }
+
+    /* ABOUT */
+    .about {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+    }
+
+    .about-visual {
+      position: relative;
+      height: 500px;
+    }
+
+    .about-card {
+      position: absolute;
+      background: var(--warm-white);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .about-card-main {
+      inset: 0 0 60px 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #e8ddd0, #d4c4b0);
+      font-size: 6rem;
+    }
+
+    .about-card-float {
+      bottom: 0;
+      right: -30px;
+      width: 180px;
+      height: 140px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.3rem;
+      box-shadow: 0 8px 32px rgba(43, 26, 14, 0.12);
+    }
+
+    .rating-big {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.8rem;
+      font-weight: 600;
+      color: var(--espresso);
+      line-height: 1;
+    }
+
+    .stars {
+      color: var(--gold);
+      font-size: 1rem;
+      letter-spacing: 2px;
+    }
+
+    .rating-count {
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+
+    .about-text p {
+      color: var(--muted);
+      line-height: 1.85;
+      margin-bottom: 1.2rem;
+      font-size: 0.95rem;
+    }
+
+    .about-features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .feature {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.82rem;
+      color: var(--espresso);
+    }
+
+    .feature-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--caramel);
+      flex-shrink: 0;
+    }
+
+    /* MENU */
+    .menu-section {
+      background: var(--espresso);
+      color: var(--cream);
+    }
+
+    .menu-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .menu-section .section-tag {
+      color: var(--gold);
+    }
+
+    .menu-section .section-title {
+      color: var(--cream);
+    }
+
+    .menu-section .section-title em {
+      color: var(--gold);
+    }
+
+    .menu-grid {
+      margin-top: 3.5rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5px;
+      background: rgba(255, 255, 255, 0.07);
+    }
+
+    .menu-item {
+      background: var(--espresso);
+      padding: 2rem;
+      transition: background 0.25s;
+      cursor: default;
+    }
+
+    .menu-item:hover {
+      background: rgba(181, 112, 58, 0.12);
+    }
+
+    .menu-emoji {
+      font-size: 2rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .menu-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: var(--cream);
+      margin-bottom: 0.4rem;
+    }
+
+    .menu-desc {
+      font-size: 0.8rem;
+      color: var(--light-muted);
+      line-height: 1.6;
+    }
+
+    .menu-tag {
+      display: inline-block;
+      margin-top: 1rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid rgba(201, 150, 63, 0.35);
+      padding: 0.2rem 0.6rem;
+      border-radius: 2px;
+    }
+
+    /* SERVICES */
+    .services-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .services-grid {
+      margin-top: 3.5rem;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .service-card {
+      border: 1px solid var(--border);
+      padding: 2.2rem;
+      border-radius: 4px;
+      transition: border-color 0.25s, box-shadow 0.25s;
+    }
+
+    .service-card:hover {
+      border-color: var(--caramel);
+      box-shadow: 0 4px 20px rgba(181, 112, 58, 0.1);
+    }
+
+    .service-icon {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .service-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .service-desc {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* REVIEWS */
+    .reviews-section {
+      background: var(--warm-white);
+    }
+
+    .reviews-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .review-summary {
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+      margin-bottom: 3.5rem;
+      flex-wrap: wrap;
+    }
+
+    .big-rating {
+      text-align: center;
+    }
+
+    .big-rating-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 5rem;
+      font-weight: 300;
+      color: var(--espresso);
+      line-height: 1;
+    }
+
+    .big-rating-stars {
+      color: var(--gold);
+      font-size: 1.2rem;
+      margin: 0.3rem 0;
+    }
+
+    .big-rating-count {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .rating-bars {
+      flex: 1;
+      min-width: 240px;
+    }
+
+    .bar-row {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .bar-label {
+      font-size: 0.75rem;
+      width: 10px;
+      color: var(--muted);
+    }
+
+    .bar-track {
+      flex: 1;
+      height: 4px;
+      background: var(--border);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      background: var(--gold);
+      border-radius: 2px;
+    }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .review-card {
+      background: var(--cream);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1.8rem;
+    }
+
+    .review-header {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .review-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--caramel);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 0.9rem;
+      font-weight: 500;
+      flex-shrink: 0;
+    }
+
+    .review-name {
+      font-size: 0.88rem;
+      font-weight: 500;
+    }
+
+    .review-date {
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-top: 0.1rem;
+    }
+
+    .review-stars {
+      color: var(--gold);
+      font-size: 0.82rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .review-text {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* HOURS */
+    .hours-section {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .hours-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .hours-table {
+      margin-top: 2.5rem;
+    }
+
+    .hour-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.85rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.88rem;
+    }
+
+    .hour-row:first-child {
+      border-top: 1px solid var(--border);
+    }
+
+    .day-name {
+      color: var(--espresso);
+    }
+
+    .hour-time {
+      color: var(--muted);
+    }
+
+    .hour-row.today .day-name {
+      color: var(--caramel);
+      font-weight: 500;
+    }
+
+    .hour-row.today .hour-time {
+      color: var(--caramel);
+    }
+
+    .popular-chart {
+      margin-top: 2.5rem;
+    }
+
+    .chart-title {
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1.2rem;
+    }
+
+    .chart-bars {
+      display: flex;
+      align-items: flex-end;
+      gap: 4px;
+      height: 80px;
+    }
+
+    .chart-bar {
+      flex: 1;
+      background: var(--border);
+      border-radius: 2px 2px 0 0;
+      position: relative;
+      transition: background 0.2s;
+    }
+
+    .chart-bar.peak {
+      background: var(--caramel);
+    }
+
+    .chart-bar.med {
+      background: rgba(181, 112, 58, 0.45);
+    }
+
+    .chart-labels {
+      display: flex;
+      gap: 4px;
+      margin-top: 0.4rem;
+      font-size: 0.6rem;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+    }
+
+    .chart-labels span {
+      flex: 1;
+      text-align: center;
+    }
+
+    .open-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(68, 160, 80, 0.12);
+      color: #2d7a3a;
+      border: 1px solid rgba(68, 160, 80, 0.25);
+      padding: 0.35rem 0.8rem;
+      border-radius: 2px;
+      font-size: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .open-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #44a050;
+      animation: blink 1.5s infinite;
+    }
+
+    /* LOCATION */
+    .location-section {
+      background: var(--espresso);
+      color: var(--cream);
+    }
+
+    .location-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .location-section .section-tag {
+      color: var(--gold);
+    }
+
+    .location-section .section-title {
+      color: var(--cream);
+    }
+
+    .location-section .section-title em {
+      color: var(--gold);
+    }
+
+    .location-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      margin-top: 3rem;
+      align-items: start;
+    }
+
+    .location-detail {
+      display: flex;
+      flex-direction: column;
+      gap: 1.8rem;
+    }
+
+    .loc-item {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .loc-icon {
+      font-size: 1.2rem;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+
+    .loc-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--light-muted);
+      margin-bottom: 0.3rem;
+    }
+
+    .loc-value {
+      font-size: 0.9rem;
+      color: var(--cream);
+      line-height: 1.5;
+    }
+
+    .loc-value a {
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    .map-placeholder {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+      height: 300px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      color: var(--light-muted);
+      font-size: 0.85rem;
+    }
+
+    .map-placeholder a {
+      display: inline-block;
+      background: var(--caramel);
+      color: white;
+      text-decoration: none;
+      padding: 0.65rem 1.5rem;
+      border-radius: 2px;
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: background 0.2s;
+    }
+
+    .map-placeholder a:hover {
+      background: var(--gold);
+    }
+
+    /* FOOTER */
+    footer {
+      background: #1a0f07;
+      color: var(--light-muted);
+      text-align: center;
+      padding: 2.5rem 2rem;
+      font-size: 0.78rem;
+    }
+
+    footer .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      color: var(--cream);
+      margin-bottom: 0.8rem;
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.3;
+      }
+    }
+
+    @keyframes blink {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.4;
+      }
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav {
+        padding: 1.2rem 1.5rem;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .about {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+
+      .about-visual {
+        height: 300px;
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .reviews-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hours-inner {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .location-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+
+      .info-item {
+        padding: 1rem 1.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">Capuccino Café</a>
+    <ul class="nav-links">
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#criticas">Críticas</a></li>
+      <li><a href="#horario">Horário</a></li>
+      <li><a href="#localizacao" class="nav-cta">Como Chegar</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-badge">☕ Pemba · Moçambique</div>
+    <h1>Um café com <em>alma</em><br>à beira-mar</h1>
+    <p class="hero-sub">Sabores autênticos, ambiente acolhedor e a melhor vista da Av. da Marginal.</p>
+    <div class="hero-actions">
+      <a href="#menu" class="btn-primary">Ver Menu</a>
+      <a href="tel:+25887843 5864" class="btn-outline">Ligar Agora</a>
+    </div>
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      <span class="scroll-label">Explorar</span>
+    </div>
+  </section>
+
+  <!-- INFO STRIP -->
+  <div class="info-strip">
+    <div class="info-item">
+      <span class="info-icon">⭐</span>
+      <span><strong>4,0</strong> — 269 críticas</span>
+    </div>
+    <div class="info-item">
+      <span class="info-icon">🕐</span>
+      <span>Fecha às <strong>21:30</strong></span>
+    </div>
+    <div class="info-item">
+      <span class="info-icon">📍</span>
+      <span>Av. da Marginal, <strong>Pemba</strong></span>
+    </div>
+    <div class="info-item">
+      <span class="info-icon">📞</span>
+      <a href="tel:+25887843 5864" style="color:var(--light-muted);text-decoration:none"><strong>87 843
+          5864</strong></a>
+    </div>
+  </div>
+
+  <!-- SOBRE -->
+  <section id="sobre">
+    <div class="about">
+      <div class="about-visual">
+        <div class="about-card about-card-main">☕</div>
+        <div class="about-card about-card-float">
+          <div class="rating-big">4,0</div>
+          <div class="stars">★★★★☆</div>
+          <div class="rating-count">269 críticas</div>
+        </div>
+      </div>
+      <div class="about-text">
+        <p class="section-tag">Sobre Nós</p>
+        <h2 class="section-title">Bem-vindo ao nosso <em>cantinho</em></h2>
+        <p>O Capuccino Café é um dos restaurantes mais queridos de Pemba, situado na deslumbrante Avenida da Marginal.
+          Num ambiente descontraído e acolhedor, servimos pratos frescos com sabores locais e internacionais.</p>
+        <p>Do clássico capuccino ao suculento file de peixe, cada prato é preparado com dedicação e carinho. Um espaço
+          perfeito para almoços de trabalho, encontros em família ou um simples café ao fim do dia.</p>
+        <div class="about-features">
+          <div class="feature">
+            <div class="feature-dot"></div>Comer no local
+          </div>
+          <div class="feature">
+            <div class="feature-dot"></div>Take Away
+          </div>
+          <div class="feature">
+            <div class="feature-dot"></div>Serviço de Entrega
+          </div>
+          <div class="feature">
+            <div class="feature-dot"></div>Vista para a Marginal
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENU -->
+  <section id="menu" class="menu-section">
+    <div class="menu-inner">
+      <p class="section-tag">O Nosso Menu</p>
+      <h2 class="section-title">Sabores que <em>encantam</em></h2>
+      <div class="menu-grid">
+        <div class="menu-item">
+          <div class="menu-emoji">☕</div>
+          <div class="menu-name">Capuccino</div>
+          <div class="menu-desc">O nosso clássico capuccino cremoso, preparado com os melhores grãos torrados. Um prazer
+            a qualquer hora do dia.</div>
+          <span class="menu-tag">Bebidas</span>
+        </div>
+        <div class="menu-item">
+          <div class="menu-emoji">🐟</div>
+          <div class="menu-name">File de Peixe</div>
+          <div class="menu-desc">Peixe fresco da costa de Pemba, grelhado ou frito, servido com acompanhamentos da casa.
+          </div>
+          <span class="menu-tag">Pratos Principais</span>
+        </div>
+        <div class="menu-item">
+          <div class="menu-emoji">🍕</div>
+          <div class="menu-name">Pizza</div>
+          <div class="menu-desc">Pizzas artesanais com massa crocante e os melhores ingredientes, muito apreciadas pelos
+            nossos clientes.</div>
+          <span class="menu-tag">Especialidades</span>
+        </div>
+        <div class="menu-item">
+          <div class="menu-emoji">🥤</div>
+          <div class="menu-name">Bebidas Frescas</div>
+          <div class="menu-desc">Sumos naturais, refrigerantes e outras bebidas para acompanhar a sua refeição em Pemba.
+          </div>
+          <span class="menu-tag">Bebidas</span>
+        </div>
+        <div class="menu-item">
+          <div class="menu-emoji">🍽️</div>
+          <div class="menu-name">Pratos do Dia</div>
+          <div class="menu-desc">Diariamente, criamos pratos especiais com ingredientes frescos e sazonais. Pergunte ao
+            nosso staff!</div>
+          <span class="menu-tag">Diário</span>
+        </div>
+        <div class="menu-item">
+          <div class="menu-emoji">🍰</div>
+          <div class="menu-name">Sobremesas</div>
+          <div class="menu-desc">Uma selecção doce para terminar a sua refeição em grande, feitas com receitas especiais
+            da casa.</div>
+          <span class="menu-tag">Sobremesas</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVIÇOS -->
+  <section id="servicos">
+    <div class="services-inner">
+      <p class="section-tag">Como Servimos</p>
+      <h2 class="section-title">À sua <em>conveniência</em></h2>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">🪑</div>
+          <div class="service-name">Comer no Local</div>
+          <div class="service-desc">Desfrute da nossa atmosfera acolhedora na Av. da Marginal. Ambiente agradável e
+            serviço atencioso.</div>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🛍️</div>
+          <div class="service-name">Take Away</div>
+          <div class="service-desc">Leve os seus pratos favoritos consigo. Embalagem cuidada para que chegue perfeita ao
+            seu destino.</div>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🛵</div>
+          <div class="service-name">Entrega ao Domicílio</div>
+          <div class="service-desc">Receba os seus pratos favoritos em casa ou no escritório. Contacte-nos para mais
+            detalhes sobre a área de entrega.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CRÍTICAS -->
+  <section id="criticas" class="reviews-section">
+    <div class="reviews-inner">
+      <p class="section-tag">O que dizem</p>
+      <h2 class="section-title">Os nossos <em>clientes</em></h2>
+      <div class="review-summary">
+        <div class="big-rating">
+          <div class="big-rating-num">4,0</div>
+          <div class="big-rating-stars">★★★★☆</div>
+          <div class="big-rating-count">269 avaliações</div>
+        </div>
+        <div class="rating-bars">
+          <div class="bar-row">
+            <span class="bar-label">5</span>
+            <div class="bar-track">
+              <div class="bar-fill" style="width:40%"></div>
+            </div>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">4</span>
+            <div class="bar-track">
+              <div class="bar-fill" style="width:30%"></div>
+            </div>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">3</span>
+            <div class="bar-track">
+              <div class="bar-fill" style="width:15%"></div>
+            </div>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">2</span>
+            <div class="bar-track">
+              <div class="bar-fill" style="width:8%"></div>
+            </div>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">1</span>
+            <div class="bar-track">
+              <div class="bar-fill" style="width:7%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="reviews-grid">
+        <div class="review-card">
+          <div class="review-header">
+            <div class="review-avatar">R</div>
+            <div>
+              <div class="review-name">Raila Torrijos</div>
+              <div class="review-date">há 4 anos</div>
+            </div>
+          </div>
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">Absolutely delicious 😋!! Um dos melhores restaurantes de Pemba. Adorei a atmosfera e a
+            comida estava deliciosa. Recomendo vivamente! 😉😎☀️</p>
+        </div>
+        <div class="review-card">
+          <div class="review-header">
+            <div class="review-avatar" style="background:#7a5c3a">M</div>
+            <div>
+              <div class="review-name">Cliente Anónimo</div>
+              <div class="review-date">há 2 anos</div>
+            </div>
+          </div>
+          <div class="review-stars">★★★★☆</div>
+          <p class="review-text">Boa localização na Marginal, o file de peixe estava excelente. Ambiente agradável para
+            relaxar. Preços razoáveis para a qualidade oferecida.</p>
+        </div>
+        <div class="review-card">
+          <div class="review-header">
+            <div class="review-avatar" style="background:#4a7a5c">A</div>
+            <div>
+              <div class="review-name">Cliente Satisfeito</div>
+              <div class="review-date">há 1 ano</div>
+            </div>
+          </div>
+          <div class="review-stars">★★★★☆</div>
+          <p class="review-text">Fui para o almoço e fiquei surpreendido com a qualidade do serviço. O capuccino é dos
+            melhores que já provei em Pemba. Vou voltar de certeza!</p>
+        </div>
+        <div class="review-card">
+          <div class="review-header">
+            <div class="review-avatar" style="background:#5c4a7a">J</div>
+            <div>
+              <div class="review-name">João M.</div>
+              <div class="review-date">há 8 meses</div>
+            </div>
+          </div>
+          <div class="review-stars">★★★☆☆</div>
+          <p class="review-text">Boa comida e localização privilegiada. O ambiente pode ficar um pouco barulhento nas
+            horas de ponta mas no geral é um sítio agradável.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HORÁRIO -->
+  <section id="horario">
+    <div class="hours-section">
+      <div class="hours-inner">
+        <div>
+          <p class="section-tag">Funcionamento</p>
+          <h2 class="section-title">Horário de <em>abertura</em></h2>
+          <div class="open-badge">
+            <div class="open-dot"></div>
+            Agora aberto
+          </div>
+          <div class="hours-table">
+            <div class="hour-row"><span class="day-name">Segunda-feira</span><span class="hour-time">09:00 –
+                21:30</span></div>
+            <div class="hour-row today"><span class="day-name">Terça-feira ← hoje</span><span class="hour-time">09:00 –
+                21:30</span></div>
+            <div class="hour-row"><span class="day-name">Quarta-feira</span><span class="hour-time">09:00 – 21:30</span>
+            </div>
+            <div class="hour-row"><span class="day-name">Quinta-feira</span><span class="hour-time">09:00 – 21:30</span>
+            </div>
+            <div class="hour-row"><span class="day-name">Sexta-feira</span><span class="hour-time">09:00 – 21:30</span>
+            </div>
+            <div class="hour-row"><span class="day-name">Sábado</span><span class="hour-time">09:00 – 21:30</span></div>
+            <div class="hour-row"><span class="day-name">Domingo</span><span class="hour-time">09:00 – 21:30</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="popular-chart">
+            <p class="section-tag" style="margin-top:3rem">Horas mais populares</p>
+            <h3
+              style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:300;margin-bottom:1.5rem;color:var(--espresso)">
+              Terças-feiras</h3>
+            <p class="chart-title">Movimento estimado por hora</p>
+            <div class="chart-bars">
+              <div class="chart-bar" style="height:15%"></div>
+              <div class="chart-bar" style="height:10%"></div>
+              <div class="chart-bar med" style="height:35%"></div>
+              <div class="chart-bar peak" style="height:75%"></div>
+              <div class="chart-bar peak" style="height:90%"></div>
+              <div class="chart-bar med" style="height:55%"></div>
+              <div class="chart-bar peak" style="height:85%"></div>
+              <div class="chart-bar peak" style="height:100%"></div>
+              <div class="chart-bar med" style="height:60%"></div>
+              <div class="chart-bar" style="height:30%"></div>
+              <div class="chart-bar" style="height:20%"></div>
+              <div class="chart-bar" style="height:10%"></div>
+            </div>
+            <div class="chart-labels">
+              <span>6h</span><span>7h</span><span>9h</span><span>11h</span>
+              <span>12h</span><span>13h</span><span>15h</span><span>18h</span>
+              <span>19h</span><span>20h</span><span>21h</span><span>22h</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOCALIZAÇÃO -->
+  <section id="localizacao" class="location-section">
+    <div class="location-inner">
+      <p class="section-tag">Encontre-nos</p>
+      <h2 class="section-title">Como <em>chegar</em></h2>
+      <div class="location-grid">
+        <div class="location-detail">
+          <div class="loc-item">
+            <span class="loc-icon">📍</span>
+            <div>
+              <div class="loc-label">Morada</div>
+              <div class="loc-value">Av. da Marginal, Pemba<br>Cabo Delgado, Moçambique<br><small
+                  style="color:var(--light-muted)">Plus Code: 2GQC+5W Pemba</small></div>
+            </div>
+          </div>
+          <div class="loc-item">
+            <span class="loc-icon">📞</span>
+            <div>
+              <div class="loc-label">Telefone</div>
+              <div class="loc-value"><a href="tel:+25887843 5864">87 843 5864</a></div>
+            </div>
+          </div>
+          <div class="loc-item">
+            <span class="loc-icon">🕐</span>
+            <div>
+              <div class="loc-label">Horário</div>
+              <div class="loc-value">Todos os dias<br>09:00 – 21:30</div>
+            </div>
+          </div>
+          <div class="loc-item">
+            <span class="loc-icon">💬</span>
+            <div>
+              <div class="loc-label">WhatsApp</div>
+              <div class="loc-value"><a href="https://wa.me/25887843 5864">Enviar mensagem</a></div>
+            </div>
+          </div>
+        </div>
+        <div class="map-placeholder">
+          <span style="font-size:2.5rem">🗺️</span>
+          <span>Av. da Marginal, Pemba</span>
+          <a href="https://maps.google.com/?q=Capuccino+Café+Pemba" target="_blank">Abrir no Google Maps</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">Capuccino Café</div>
+    <p>Av. da Marginal, Pemba · Moçambique · 87 843 5864</p>
+    <p style="margin-top:0.5rem;opacity:0.5">© 2025 Capuccino Café. Todos os direitos reservados.</p>
+  </footer>
+
+</body>
+
+</html>
