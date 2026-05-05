@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cappuccino Café</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5f1e8 0%, #e8dcc8 100%);
+            min-height: 100vh;
+        }
+
+        header {
+            background: linear-gradient(135deg, #6f4e37 0%, #8b6f47 100%);
+            color: #fff;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        nav {
+            background: #8b6f47;
+            padding: 1rem 0;
+            text-align: center;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 1.5rem;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .hero {
+            text-align: center;
+            margin: 3rem 0;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            color: #6f4e37;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 2rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #d4a574;
+            color: #fff;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.3s, background 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .cta-button:hover {
+            background: #c9975f;
+            transform: translateY(-2px);
+        }
+
+        .menu {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .menu-item {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .menu-item h3 {
+            color: #6f4e37;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .menu-item p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            color: #d4a574;
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
+        footer {
+            background: #6f4e37;
+            color: #fff;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+        }
+
+        .coffee-emoji {
+            font-size: 2rem;
+            margin: 0 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><span class="coffee-emoji">☕</span> Cappuccino Café <span class="coffee-emoji">☕</span></h1>
+        <p>O melhor café da cidade, preparado com paixão</p>
+    </header>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#menu">Cardápio</a>
+        <a href="#about">Sobre</a>
+        <a href="#contact">Contacto</a>
+    </nav>
+
+    <div class="container">
+        <section class="hero" id="home">
+            <h2>Bem-vindo ao Cappuccino Café</h2>
+            <p>Desfrute de bebidas premium e um ambiente aconchegante</p>
+            <button class="cta-button">Encomendar Agora</button>
+        </section>
+
+        <section id="menu">
+            <h2 style="text-align: center; color: #6f4e37; margin-bottom: 2rem; font-size: 2rem;">Nosso Cardápio</h2>
+            <div class="menu">
+                <div class="menu-item">
+                    <h3>☕ Cappuccino Clássico</h3>
+                    <p>Café expresso com leite vaporizado e espuma</p>
+                    <span class="price">€3,50</span>
+                </div>
+
+                <div class="menu-item">
+                    <h3>🍶 Espresso Duplo</h3>
+                    <p>Duas doses de café expresso intenso</p>
+                    <span class="price">€2,50</span>
+                </div>
+
+                <div class="menu-item">
+                    <h3>🥛 Latte Suave</h3>
+                    <p>Café com muito leite quente e suave</p>
+                    <span class="price">€3,80</span>
+                </div>
+
+                <div class="menu-item">
+                    <h3>🍫 Mocha Chocolate</h3>
+                    <p>Café com chocolate quente e leite</p>
+                    <span class="price">€4,20</span>
+                </div>
+
+                <div class="menu-item">
+                    <h3>❄️ Cold Brew</h3>
+                    <p>Café gelado refrescante e suave</p>
+                    <span class="price">€3,00</span>
+                </div>
+
+                <div class="menu-item">
+                    <h3>🥑 Matcha Latte</h3>
+                    <p>Chá verde matcha com leite vaporizado</p>
+                    <span class="price">€4,00</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" style="margin: 3rem 0; text-align: center;">
+            <h2 style="color: #6f4e37; margin-bottom: 1rem; font-size: 2rem;">Sobre Nós</h2>
+            <p style="max-width: 600px; margin: 0 auto; color: #555;">
+                O Cappuccino Café é um espaço dedicado aos amantes de café. Com grãos selecionados e preparação artesanal, 
+                oferecemos a melhor experiência de café. Visite-nos e descubra o sabor perfeito!
+            </p>
+        </section>
+
+        <section id="contact" style="text-align: center; margin: 3rem 0;">
+            <h2 style="color: #6f4e37; margin-bottom: 1rem; font-size: 2rem;">Contacte-nos</h2>
+            <p style="margin: 0.5rem 0;">📍 Rua do Café, 123 - Cidade</p>
+            <p style="margin: 0.5rem 0;">📞 +351 XXX XXX XXX</p>
+            <p style="margin: 0.5rem 0;">📧 info@cappuccinocafe.com</p>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Cappuccino Café. Todos os direitos reservados.</p>
+        <p>Feito com ❤️ e ☕</p>
+    </footer>
+</body>
+</html>
